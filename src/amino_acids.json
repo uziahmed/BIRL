@@ -1,0 +1,128 @@
+[
+	{
+		"name":"phenylalanine",
+		"found":0,
+		"codons":["AAA", "AAG"],
+		"SLA":"F"
+	},
+	{
+		"name":"leucine",
+		"found":0,
+		"codons":["CTT", "CTC", "CTA", "CTG", "TTA", "TTG"],
+		"SLA":"L"
+	},
+	{
+		"name":"serine",
+		"found":0,
+		"codons":["TCT", "TCC", "TCA", "TCG", "AGT", "AGC"],
+		"SLA":"S"
+	},
+	{
+		"name":"proline",
+		"found":0,
+		"codons":["CCT", "CCC", "CCA", "CCG"],
+		"SLA":"P"
+	},
+	{
+		"name":"isoleucine",
+		"found":0,
+		"codons":["ATT", "ATC", "ATA"],
+		"SLA":"I"
+	},
+	{
+		"name":"methionine",
+		"found":0,
+		"codons":["ATG"],
+		"SLA":"M"
+	},
+	{
+		"name":"threonine",
+		"found":0,
+		"codons":["ACT", "ACC", "ACA", "ACG"],
+		"SLA":"T"
+	},
+	{
+		"name":"valine",
+		"found":0,
+		"codons":["TTT", "TTC"],
+		"SLA":"V"
+	},
+	{
+		"name":"alanine",
+		"found":0,
+		"codons":["GCT", "GCC", "GCA", "GCG"],
+		"SLA":"A"
+	},
+	{
+		"name":"cysteine",
+		"found":0,
+		"codons":["TGT", "TGC"],
+		"SLA":"C"
+	},
+	{
+		"name":"tryptophan",
+		"found":0,
+		"codons":["TGG"],
+		"SLA":"W"
+	},
+	{
+		"name":"tyrosine",
+		"found":0,
+		"codons":["TAT", "TAC"],
+		"SLA":"Y"
+	},
+	{
+		"name":"arginine",
+		"found":0,
+		"codons":["CGT", "CGC", "CGA", "CGG", "AGA", "AGG"],
+		"SLA":"R"
+	},
+	{
+		"name":"histidine",
+		"found":0,
+		"codons":["CAT", "CAC"],
+		"SLA":"H"
+	},
+	{
+		"name":"glutamine",
+		"found":0,
+		"codons":["CAA", "CAG"],
+		"SLA":"Q"
+	},
+	{
+		"name":"asparagine",
+		"found":0,
+		"codons":["AAT", "AAC"],
+		"SLA":"N"
+	},
+	{
+		"name":"lysine",
+		"found":0,
+		"codons":["AAA", "AAG"],
+		"SLA":"K"
+	},
+	{
+		"name":"glycine",
+		"found":0,
+		"codons":["GGT", "GGC", "GGA", "GGG"],
+		"SLA":"G"
+	},
+	{
+		"name":"aspartic acid",
+		"found":0,
+		"codons":["GAT", "GAC"],
+		"SLA":"D"
+	},
+	{
+		"name":"glutamic acid",
+		"found":0,
+		"codons":["GAA", "GAG"],
+		"SLA":"E"
+	},
+	{
+		"name":"stop signal (stop codon)",
+		"found":0,
+		"codons":["TAA", "TAG", "TGA"],
+		"SLA":""
+	}
+]
