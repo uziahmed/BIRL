@@ -1,3 +1,4 @@
+from re import I
 import cpplib
 import matplotlib.pyplot as plt
 
@@ -18,7 +19,8 @@ minNuc = int(input("please enter the amount of minimun nucleotides: "))
 
 print("Processing....................")
 
-ORFs = Bio.ORFfinder(gene, minNuc);
+for i in range(6):
+    ORFs = Bio.ORFfinder(gene, minNuc, frame=i);
 
 longestORF = max(ORFs, key=len)
 

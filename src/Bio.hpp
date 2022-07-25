@@ -1,8 +1,8 @@
-#include<string>
-#include<vector>
-#include<unordered_map>
+#include <string>
+#include <vector>
+#include <unordered_map>
 #include <algorithm> 
-#include<fstream>
+#include <fstream>
 
 #include "include/json.hpp"
 
@@ -19,9 +19,9 @@ class Bio{
 
         Bio(){}
 
-        std::vector<std::string> toCodons(std::string gene){
+        std::vector<std::string> toCodons(std::string gene, int start = 0){
             std::vector<std::string> output;
-            for (int i = 0; i < gene.length(); i += 3) {
+            for (int i = start; i < gene.length(); i += 3) {
                 if (gene.substr(i, 3).length() == 3)
                 {
                     output.insert(output.end(),gene.substr(i, 3));
@@ -47,17 +47,23 @@ class Bio{
             return output;
         }
 
-        std::vector<std::string> ORF_finder(std::string gene, int minNuc = 70){
-            std::vector<std::string> singleCodon = toCodons(gene);
+        std::vector<std::string> ORF_finder(std::string gene, int minNuc = 70, int frame = 0, bool isGenome = false, bool nestedORF = false){
+            std::vector<std::string> singleCodon;
+            if (isGenome == false)
+            {
+                if(frame <= 2) singleCodon = toCodons(gene, frame);
+                else singleCodon = toCodons(reverse_comp(gene), frame-3);
+            }else singleCodon = toCodons(gene);
+            
             for (int i = 0; i < singleCodon.size(); i++)
             {
                 int currentIteration = 0;
-                if (i < currentIteration){continue;}
+                if (i < currentIteration && nestedORF == false) continue;
                 if (singleCodon[i] == "ATG")
                 {
                     std::vector<std::string> currentORF;
                     currentORF.insert(currentORF.end(),singleCodon[i]);
-                    for(int j = i; j < singleCodon.size(); j++)
+                    for(int j = i; j <= (singleCodon.size()-i); j++)
                     {
                         if (singleCodon[j] == "TGA" || singleCodon[j] == "TAA" || singleCodon[j] == "TAG")
                         {
