@@ -5,9 +5,9 @@ Bio = cpplib.Bio()
 
 fileInp = input("Please enter the path to your genomic file: ")
 gene = ""
-file = open(fileInp, "r")
+with open(fileInp, "r") as geneFile:
+      gene = geneFile.read().splitlines(True)
 lines = []
-gene = file.read().splitlines(True)
 for line in gene:
     if (line.startswith("A" or "T" or "C" or "G")):
         lines.append(line)
@@ -21,6 +21,8 @@ print("Processing....................")
 ORFs = Bio.ORFfinder(gene, minNuc);
 
 longestORF = max(ORFs, key=len)
+
+print(f"Longest ORF: {longestORF}")
 
 nucCount = Bio.nucCounter(longestORF);
 nucleotideLabels = []
