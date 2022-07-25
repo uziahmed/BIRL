@@ -5,7 +5,7 @@
 #include<pybind11/functional.h>
 
 #include "Bio.hpp"
-#include "pybind11_json.hpp"
+#include "include/pybind11_json.hpp"
 
 namespace py = pybind11;
 
