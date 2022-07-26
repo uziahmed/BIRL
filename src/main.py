@@ -10,7 +10,7 @@ with open(fileInp, "r") as geneFile:
       gene = geneFile.read().splitlines(True)
 lines = []
 for line in gene:
-    if (line.startswith("A" or "T" or "C" or "G")):
+    if not(line.startswith(">")):
         lines.append(line)
     gene = "".join(lines)
     gene = gene.replace("\n", "")

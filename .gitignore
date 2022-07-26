@@ -3,3 +3,4 @@ src/fig.png
 src/gene.fna
 .vscode
 src/test.py
+src/codon.json
