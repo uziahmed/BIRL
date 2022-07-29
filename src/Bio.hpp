@@ -10,7 +10,7 @@ using json = nlohmann::json;
 
 std::ifstream aminoAcidsFile("amino_acids.json");
 
-class Bio{
+class Bio {
     public:
         std::vector<std::string> codons;
         std::string gene;
@@ -62,8 +62,7 @@ class Bio{
                 if (singleCodon[i] == "ATG")
                 {
                     std::vector<std::string> currentORF;
-                    currentORF.insert(currentORF.end(),singleCodon[i]);
-                    for(int j = i; j <= (singleCodon.size()-i); j++)
+                    for(int j = i+1; j <= (singleCodon.size()-i); j++)
                     {
                         if (singleCodon[j] == "TGA" || singleCodon[j] == "TAA" || singleCodon[j] == "TAG")
                         {
@@ -75,7 +74,6 @@ class Bio{
                             continue;
                         }
                     }
-                    currentORF.erase(currentORF.begin());
                     std::string out = std::accumulate(currentORF.begin(), currentORF.end(), std::string(""));
                     if (out.size() >= minNuc) TotalORF.insert(TotalORF.end(),out);
                 }
