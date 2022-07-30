@@ -47,7 +47,7 @@ class Bio{
             return output;
         }
 
-        std::vector<std::string> ORF_finder(std::string gene, int minNuc = 70, int frame = 0, bool isGenome = false, bool nestedORF = false){
+        std::vector<std::string> ORF_finder(std::string gene, int minNuc = 70, int frame = 0, bool isGenome = false){
             std::vector<std::string> singleCodon;
             if (isGenome == false)
             {
@@ -57,8 +57,6 @@ class Bio{
             
             for (int i = 0; i < singleCodon.size(); i++)
             {
-                int currentIteration = 0;
-                if(i < currentIteration && nestedORF == false) continue;
                 if (singleCodon[i] == "ATG")
                 {
                     std::vector<std::string> currentORF;
@@ -68,7 +66,6 @@ class Bio{
                         if (singleCodon[j] == "TAA" || singleCodon[j] == "TGA" || singleCodon[j] == "TAG")
                         {
                             currentORF.push_back(singleCodon[j]);
-                            currentIteration = j;
                             break;
                         }else{
                             currentORF.push_back(singleCodon[j]);

@@ -23,7 +23,7 @@ for i in range(6):
 
 longestORF = max(ORFs, key=len)
 
-print(f"Longest ORF: {longestORF}")
+print(f"Longest ORF: {longestORF} \n Total ORF's found {len(ORFs)}")
 
 nucCount = Bio.nucCounter(longestORF);
 nucleotideLabels = []
