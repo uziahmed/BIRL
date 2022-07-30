@@ -58,27 +58,29 @@ class Bio{
             for (int i = 0; i < singleCodon.size(); i++)
             {
                 int currentIteration = 0;
-                if (i < currentIteration && nestedORF == false) continue;
+                if(i < currentIteration && nestedORF == false) continue;
                 if (singleCodon[i] == "ATG")
                 {
                     std::vector<std::string> currentORF;
-                    currentORF.insert(currentORF.end(),singleCodon[i]);
-                    for(int j = i; j <= (singleCodon.size()-i); j++)
+                    currentORF.push_back(singleCodon[i]);
+                    for (int j = i; j < singleCodon.size(); j++)
                     {
-                        if (singleCodon[j] == "TGA" || singleCodon[j] == "TAA" || singleCodon[j] == "TAG")
+                        if (singleCodon[j] == "TAA" || singleCodon[j] == "TGA" || singleCodon[j] == "TAG")
                         {
-                            currentORF.insert(currentORF.end(),singleCodon[j]);
+                            currentORF.push_back(singleCodon[j]);
                             currentIteration = j;
                             break;
                         }else{
-                            currentORF.insert(currentORF.end(),singleCodon[j]);
+                            currentORF.push_back(singleCodon[j]);
                             continue;
                         }
+                        
                     }
                     currentORF.erase(currentORF.begin());
                     std::string out = std::accumulate(currentORF.begin(), currentORF.end(), std::string(""));
-                    if (out.size() >= minNuc) TotalORF.insert(TotalORF.end(),out);
+                    if(out.length() >= minNuc) TotalORF.push_back(out);
                 }
+                
             }
             return TotalORF;
         }
