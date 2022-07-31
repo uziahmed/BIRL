@@ -6,3 +6,5 @@ src/test.py
 src/codon.json
 src/GCF_000001405.40_GRCh38.p14_genomic.fna
 src/gene2.fna
+src/Bio
+src/a.out
