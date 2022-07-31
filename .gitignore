@@ -9,4 +9,4 @@ src/gene2.fna
 src/Bio
 src/a.out
 src/main.py
-src/cpplib
+src/cpplib.cpp
