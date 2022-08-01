@@ -12,8 +12,6 @@ std::ifstream aminoAcidsFile("amino_acids.json");
 
 class Bio{
     public:
-        std::vector<std::string> codons;
-        std::string gene;
         std::vector<std::string> TotalORF;
         json aminoAcidsData = json::parse(aminoAcidsFile);
 
@@ -24,8 +22,7 @@ class Bio{
             for (int i = start; i < gene.length(); i += 3) {
                 if (gene.substr(i, 3).length() == 3)
                 {
-                    output.insert(output.end(),gene.substr(i, 3));
-                    codons = output;
+                    output.push_back(gene.substr(i, 3));
                 }
             }
             return output;
@@ -55,30 +52,34 @@ class Bio{
                 else singleCodon = toCodons(reverse_comp(gene), frame-3);
             }else singleCodon = toCodons(gene);
             
+            std::vector<std::string> currentORF;
+            bool startCodonFound = false;
             for (int i = 0; i < singleCodon.size(); i++)
             {
                 if (singleCodon[i] == "ATG")
                 {
-                    std::vector<std::string> currentORF;
                     currentORF.push_back(singleCodon[i]);
-                    for (int j = i; j < singleCodon.size(); j++)
-                    {
-                        if (singleCodon[j] == "TAA" || singleCodon[j] == "TGA" || singleCodon[j] == "TAG")
-                        {
-                            currentORF.push_back(singleCodon[j]);
-                            if(nestedORF == false) i = j;
-                            break;
-                        }else{
-                            currentORF.push_back(singleCodon[j]);
-                            continue;
-                        }
-                        
-                    }
-                    currentORF.erase(currentORF.begin());
-                    std::string out = std::accumulate(currentORF.begin(), currentORF.end(), std::string(""));
-                    if(out.length() >= minNuc) TotalORF.push_back(out);
+                    startCodonFound = true;
                 }
-                
+                else if(singleCodon[i] == "TAA" || singleCodon[i] == "TAG" || singleCodon[i] == "TGA"){
+                    if (startCodonFound)
+                    {
+                        currentORF.push_back(singleCodon[i]);
+                        std::string out = std::accumulate(currentORF.begin(), currentORF.end(), std::string(""));
+                        TotalORF.push_back(out);
+                        currentORF.clear();
+                        startCodonFound = false;
+                    }
+                }else if(singleCodon[i] == "NNN"){
+                    currentORF.clear();
+                    startCodonFound = false;
+                }
+                else{
+                    if (startCodonFound)
+                    {
+                        currentORF.push_back(singleCodon[i]);
+                    }
+                }
             }
             return TotalORF;
         }
