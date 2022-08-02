@@ -40,7 +40,8 @@ data = {
     "Id":len(os.listdir("Data")),
     "FileName": fileInp,
     "LongestORF":longestORF,
-    "protien":Bio.translate(longestORF)
+    "LongestProtien":Bio.translate(longestORF),
+    "AllORF":Bio.totalORFs
 }
 
 currentFile = str(len(os.listdir('Data')))
