@@ -1,5 +1,8 @@
 # Overview: 
-A basic ORF(open reading frame) finder and DNA sequence analyzer.
+A ORF(open reading frame) finder, DNA sequence analyzer and protien extractor written in C++ and python.
+
+## Goal
+The goal of this project is a clean and effiecient way to extract protiens sequences from DNA sequences for further processing and data extraction.
 
 ## Getting started:
 firstly clone the repository and ```cd``` into it and then later install all the required libraries with pip
@@ -20,3 +23,4 @@ python3 src/main.py
 - Python 3.10
 - C++11
 - pybind11
+- Matplotlib
