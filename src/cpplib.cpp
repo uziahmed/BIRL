@@ -15,12 +15,12 @@ PYBIND11_MODULE(cpplib, m) {
     .def(py::init<>())
     .def("toCodon", &Bio::toCodons, py::arg("gene"), py::arg("start")=0)
     .def("reverseComplement", &Bio::reverse_comp)
-    .def("ORFfinder", &Bio::ORF_finder, py::arg("gene"), py::arg("minNuc")=70, py::arg("frame")=0, py::arg("isGenome")=false, py::arg("nestedORF")=false)
+    .def("ORFfinder", &Bio::ORF_finder, py::arg("gene"), py::arg("minNuc")=70, py::arg("frame")=0, py::arg("isGenome")=false)
     .def("codonCounter", &Bio::codonCounter)
     .def("aminoAcidsCounter", &Bio::aminoAcidsCounter)
     .def("translate", &Bio::translate)
     .def("nucCounter", &Bio::nucleotideFrequency)
-    .def_readwrite("codons", &Bio::codons)
-    .def_readwrite("gene", &Bio::gene)
+    .def("genomeProcessor", &Bio::genomeProcessor)
+    .def_readwrite("totalORFs", &Bio::TotalORF)
     ;
 }

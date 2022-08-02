@@ -1,29 +1,52 @@
 import cpplib
 import matplotlib.pyplot as plt
+import os
+import json
 
 Bio = cpplib.Bio()
 
+userInp = input("do you want to process an entire genome or a sequence(1:genone, 2:sequence): ")
 fileInp = input("Please enter the path to your genomic file: ")
-gene = ""
-with open(fileInp, "r") as geneFile:
-      gene = geneFile.read().splitlines(True)
-lines = []
-for line in gene:
-    if not(line.startswith(">")):
-        lines.append(line)
-    gene = "".join(lines)
-    gene = gene.replace("\n", "")
+if userInp == "genome" or "1":
+    Bio.genomeProcessor(fileInp)
+else:
+    gene = ""
+    with open(fileInp, "r") as geneFile:
+        gene = geneFile.read().splitlines(True)
+    lines = []
+    for line in gene:
+        if not(line.startswith(">")):
+            lines.append(line)
+        gene = "".join(lines)
+        gene = gene.replace("\n", "")
 
-minNuc = int(input("please enter the amount of minimun nucleotides: "))
+    minNuc = int(input("please enter the amount of minimun nucleotides: "))
 
-print("Processing....................")
+    print("Processing....................")
 
-for i in range(6):
-    ORFs = Bio.ORFfinder(gene, minNuc, frame=i);
+    for i in range(6):
+        Bio.ORFfinder(gene, minNuc, frame=i);
 
-longestORF = max(ORFs, key=len)
+print("finding longest ORF...............")
+longestORF = max(Bio.totalORFs, key=len)
 
-print(f"Longest ORF: {longestORF} \n Total ORF's found {len(ORFs)}")
+print(f"Longest ORF: {longestORF} \n Total ORF's found {len(Bio.totalORFs)}")
+
+if not os.path.exists('Data'):
+    os.makedirs('Data')
+print("writting data to a file.............")
+print(f"Data/genome{str(len(os.listdir('Data')))}.json")
+data = {
+    "Id":len(os.listdir("Data")),
+    "FileName": fileInp,
+    "LongestORF":longestORF,
+    "protien":Bio.translate(longestORF)
+}
+
+currentFile = str(len(os.listdir('Data')))
+
+with open(f"Data/genome{currentFile}.json", "w") as jsonFile:
+    json.dump(data, jsonFile)
 
 nucCount = Bio.nucCounter(longestORF);
 nucleotideLabels = []
@@ -63,5 +86,7 @@ plt.pie(aminoAcidsY, labels = aminoAcidsPieChartLables, textprops = {"fontsize":
 plt.title("Amino Acids")
 plt.legend(aminoAcidsY,title="Amino Acid Frequency", loc="lower right", prop={"size":5}, bbox_to_anchor=(1.3, -0.4), ncol=2)
 
-plt.savefig("fig.png")
-plt.show()
+if userInp == "genome" or userInp == "1":
+    plt.savefig(f"Data/genome{currentFile}.png", dpi=1200)
+else:
+    plt.show()

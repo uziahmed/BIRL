@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <algorithm> 
 #include <fstream>
+#include <iostream>
 
 #include "include/json.hpp"
 
@@ -44,7 +45,7 @@ class Bio{
             return output;
         }
 
-        std::vector<std::string> ORF_finder(std::string gene, int minNuc = 70, int frame = 0, bool isGenome = false, bool nestedORF=false){
+        std::vector<std::string> ORF_finder(std::string gene, int minNuc = 70, int frame = 0, bool isGenome = false){
             std::vector<std::string> singleCodon;
             if (isGenome == false)
             {
@@ -139,4 +140,23 @@ class Bio{
             return nucTable;
         }
 
+        std::vector<std::string> genomeProcessor(std::string fileInp){
+            std::ifstream bigFile(fileInp);
+            constexpr size_t size = 10;
+            constexpr size_t bufferSize = 1024 * (1024 * size);
+            std::unique_ptr<char[]> buffer(new char[bufferSize]);
+            int counter = 0;
+            std::cout<<"started processing.......\n";
+            while (bigFile)
+            {
+                bigFile.read(buffer.get(), bufferSize);
+                std::string Seq = std::string(buffer.get(), bigFile.gcount());
+                Seq.erase(std::remove(Seq.begin(), Seq.end(), '\n'), Seq.end());
+                std::transform(Seq.begin(), Seq.end(), Seq.begin(), ::toupper);
+                counter += size;
+                ORF_finder(Seq, 70, 0, true);
+                std::cout<<counter<< " MB's processed"<<std::endl;
+            }
+            return TotalORF;
+        }
 };
