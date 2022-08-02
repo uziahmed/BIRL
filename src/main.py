@@ -86,7 +86,5 @@ plt.pie(aminoAcidsY, labels = aminoAcidsPieChartLables, textprops = {"fontsize":
 plt.title("Amino Acids")
 plt.legend(aminoAcidsY,title="Amino Acid Frequency", loc="lower right", prop={"size":5}, bbox_to_anchor=(1.3, -0.4), ncol=2)
 
-if userInp == "genome" or userInp == "1":
-    plt.savefig(f"Data/genome{currentFile}.png", dpi=1200)
-else:
-    plt.show()
+
+plt.savefig(f"Data/genome{currentFile}.png", dpi=1200)
