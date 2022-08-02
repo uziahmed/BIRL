@@ -9,3 +9,5 @@ src/gene2.fna
 src/Bio
 src/a.out
 src/main
+src/Data
+src/functions.py
