@@ -21,6 +21,7 @@ PYBIND11_MODULE(cpplib, m) {
     .def("translate", &Bio::translate)
     .def("nucCounter", &Bio::nucleotideFrequency)
     .def("genomeProcessor", &Bio::genomeProcessor)
+    .def("compliment", &Bio::compliment)
     .def_readwrite("totalORFs", &Bio::TotalORF)
     ;
 }

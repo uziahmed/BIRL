@@ -45,6 +45,33 @@ class Bio{
             return output;
         }
 
+        std::string compliment(std::string gene){
+            std::unordered_map<char, char> rev_comp;
+            rev_comp['T'] = 'A';
+            rev_comp['A'] = 'T';
+            rev_comp['C'] = 'G';
+            rev_comp['G'] = 'C';
+            std::vector<char> rev;
+            for (int i = 0; i < gene.length(); i++)
+            {
+                rev.push_back(rev_comp[gene[i]]);
+            }
+            std::string output(rev.begin(), rev.end());
+            return output;
+        }
+
+        std::string transcribe(std::string gene){
+            gene = compliment(gene);
+            for (int i = 0; i < gene.length(); i++)
+            {
+                if (gene[i] == 'T')
+                {
+                    gene[i] = 'U';
+                }
+            }
+            return gene;
+        }
+
         std::vector<std::string> ORF_finder(std::string gene, int minNuc = 70, int frame = 0, bool isGenome = false){
             std::vector<std::string> singleCodon;
             if (isGenome == false)
